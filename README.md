@@ -1,5 +1,5 @@
-# LoopyBayesian
-An implementation of Belief Propagation for Loopy Bayesian Networks
+# PROBABLE
+PROBABLE stands for PROpagation in BAyesian BeLiEf networks, and is an Python implementation of Belief Propagation for Loopy Bayesian Networks
 
 ## Source code
 The source code is a single file containing all the reletive functions for defining conditional probabilities, setting observations and determining marginal probabilities.
