@@ -1,7 +1,7 @@
 import numpy as np
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
-from loopybeliefprop import beliefpropagation, noinfo, choose
+from probable import beliefpropagation, noinfo, choose
 
 def main():
     ######################## USER INPUT STARTS HERE ###########################
