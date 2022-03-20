@@ -1,7 +1,7 @@
 import numpy as np
 import math as math
 
-def choose(outcomes,choice):
+def _choose(outcomes,choice):
     for i in range(len(outcomes)):
         if outcomes[i]==choice:
             temp = np.zeros(len(outcomes))
@@ -9,6 +9,10 @@ def choose(outcomes,choice):
             return temp
 
     return np.ones(len(outcomes))
+
+
+def choose(info,outcomes,node,choice):
+    info[node] = _choose(outcomes[node],choice)
 
 def noinfo(outcomes):
     return np.ones(total)
@@ -55,7 +59,7 @@ def factor_graph(nodes,parents,info):
     return variable_data,variable_adj,factor_data,factor_adj
     
 
-def beliefpropagation(nodes, dist, parents, outcomes, info, iterations, tolerance):
+def sumproduct(nodes, dist, parents, outcomes, info, iterations, tolerance):
 
     M={}
     for x in dist:

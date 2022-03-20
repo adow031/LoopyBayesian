@@ -1,7 +1,7 @@
 import numpy as np
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
-from probable import beliefpropagation, noinfo, choose
+from probable import sumproduct, choose
 
 def main():
     ######################## USER INPUT STARTS HERE ###########################
@@ -18,15 +18,10 @@ def main():
     parents['P5']=['S1']
     parents['G1']=['P1','P2','P3','P4','P5']
     
-    # Set up information structure
-    info={}
-
     pWS=0.7
     pWR=0.35
 
-    # Set up conditional distribution structure
-    M={}
-
+    # Define outcomes
     outcomes={}
     outcomes['S1']=["Player1Serves","Player2Serves"]
     outcomes['P1']=[1,2]
@@ -36,6 +31,7 @@ def main():
     outcomes['P5']=[1,2]
     outcomes['G1']=[1,2]
 
+    # Set up conditional distribution structure
     dist={}
     dist['S1'] = [0.5,0.5]
 
@@ -92,16 +88,16 @@ def main():
    
     # Specify any given information for each event The choose functions takes two arguments: an ordered list of outcomes, and the specified outcome name.
     # If you do not wish to specify the outcome, just use any name/number not in the list of outcomes as your choice.
+    info={}
+    choose(info,outcomes,'S1',"Player2Serves")
+    choose(info,outcomes,'P1',1)
+    choose(info,outcomes,'P2',0)
+    choose(info,outcomes,'P3',0)
+    choose(info,outcomes,'P4',0)
+    choose(info,outcomes,'P5',0)
+    choose(info,outcomes,'G1',0)
     
-    info['S1']=choose(outcomes['S1'],"Player2Serves")
-    info['P1']=choose(outcomes['P1'],1)
-    info['P2']=choose(outcomes['P2'],0)
-    info['P3']=choose(outcomes['P3'],0)
-    info['P4']=choose(outcomes['P4'],0)
-    info['P5']=choose(outcomes['P5'],0)
-    info['G1']=choose(outcomes['G1'],0)
-    
-    beliefpropagation(nodes,dist,parents,outcomes,info,100,0.0001)
+    sumproduct(nodes,dist,parents,outcomes,info,100,0.0001)
 
 ######################### USER INPUT ENDS HERE ############################
 
